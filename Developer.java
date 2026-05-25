@@ -7,68 +7,67 @@ class Developer extends Employee implements Payable {
         
        @Override
                 
-        ArrayList addEmployeeName(Scanner kb){
-       ArrayList<String> name= new ArrayList<>();
-        String names;
-      
+        ArrayList addEmployeeName(ArrayList<String> name,String names){
+            
+                  name.add(names);
+
         
-        System.out.print("Please enter employee name: ");
-        names= kb.next();
-            name.add(names);
+       /* System.out.print("Please enter employee name: ");
+        names= kb.next();*/
         
      return name;
     }
         @Override
-    ArrayList addEmployeeID(Scanner kb){
-       ArrayList<String> ID= new ArrayList<>();
-        String id;
+    ArrayList addEmployeeID(ArrayList<String> ID,String id){
+        /*String id;
         System.out.print("Please enter employee ID: ");
-        id= kb.next();
+        id= kb.next();*/
             ID.add(id);
             
      return ID;       
     }
         @Override
-        ArrayList addEmployeeSalary(Scanner kb){
-            ArrayList<Double> Salary= new ArrayList<>();
-             double salary ;     
+        ArrayList addEmployeeSalary(ArrayList<Double> Salary,double salary){
+             /*double salary ;     
         System.out.print("Please enter employee base Salary: ");
-        salary= kb.nextDouble();
+        salary= kb.nextDouble();*/
             Salary.add(salary);
             
         return Salary;
     }
             
         @Override
-	void displayInfo(ArrayList names, ArrayList ID,ArrayList salary){
+	void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name){
            
 		for(int a=0;a<names.size(); a++){
-                    System.out.println(names.get(a));
+                   /* System.out.print(name.get(a)+" ");
+                    System.out.print(id.get(a)+" ");
+                    System.out.print(Salary.get(a)+" ");*/
 
-                    for(int z=0; z<ID.size(); z++){
-                        System.out.println(salary.get(z));
 
-                        for(int x=0; x<salary.size(); x++){
-                            System.out.println(salary.get(x));
-                        }
-                    }
+                    System.out.print(names.get(a)+" ");
+                    System.out.print(ID.get(a)+" ");
+                    System.out.print(salary.get(a)+"\n");
+                        
+                    
                 }
 	}
 	
+        @Override
 	 public void calculateSalary(Scanner kb, double salary) {
-    char answer;   
-    int overTimeHours=0;   
-    final int EXTRA_HOURS_RATE= 300;
-    double total;
-    
-        System.out.println("Are there any overtime hours that you did? YES/NO: ");
-        answer= kb.next().toUpperCase().charAt(0);
+            char answer;   
+            int overTimeHours=0;   
+            final int EXTRA_HOURS_RATE= 300;
+            double total;
+
+            System.out.println("Are there any overtime hours that you did? YES/NO: ");
+            answer= kb.next().toUpperCase().charAt(0);
         
-        if(answer=='Y'){
-            total= salary+(overTimeHours*EXTRA_HOURS_RATE);
-        }else{
-            total= salary;
-        }
+            if(answer=='Y'){
+                total= salary+(overTimeHours*EXTRA_HOURS_RATE);
+            }else{
+                total= salary;
+            }
          }	
 	
 }

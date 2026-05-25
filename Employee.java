@@ -7,10 +7,10 @@ String name;
 String ID;
 double baseSalary;
 
-abstract void displayInfo(ArrayList names, ArrayList ID,ArrayList salary);
-abstract ArrayList addEmployeeName(Scanner kb);
-abstract ArrayList addEmployeeID(Scanner kb);
-abstract ArrayList addEmployeeSalary(Scanner kb);
+abstract void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name);
+abstract ArrayList addEmployeeName(ArrayList<String> names ,String name);
+abstract ArrayList addEmployeeID(ArrayList<String> Id,String ID);
+abstract ArrayList addEmployeeSalary(ArrayList<Double> Salary, double salary);
 
  // TODO code application logic here
     

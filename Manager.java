@@ -5,52 +5,45 @@ public class Manager extends Employee implements Payable{
 
 
     @Override
-    ArrayList addEmployeeName(Scanner kb){
-       ArrayList<String> name= new ArrayList<>();
-        String names;
-      
-        
-        System.out.print("Please enter employee name: ");
-        names= kb.next();
-            name.add(names);
+    ArrayList<String> addEmployeeName(ArrayList<String> name, String names){
+       name.add(names);
         
      return name;
     }
     @Override
-    ArrayList addEmployeeID(Scanner kb){
-       ArrayList<String> ID= new ArrayList<>();
-        String id;
+    ArrayList<String> addEmployeeID(ArrayList<String> ID, String id){
+        ID.add(id);
+
+       /* String id;
         System.out.print("Please enter employee ID: ");
-        id= kb.next();
-            ID.add(id);
+        id= kb.next();*/
             
      return ID;       
     }
     @Override
-        ArrayList addEmployeeSalary(Scanner kb){
-            ArrayList<Double> Salary= new ArrayList<>();
-             double salary ;     
+        ArrayList<Double> addEmployeeSalary(ArrayList<Double> Salary, double salary){
+           
+            /*double salary ;     
         System.out.print("Please enter employee base Salary: ");
-        salary= kb.nextDouble();
+        salary= kb.nextDouble();*/
             Salary.add(salary);
             
         return Salary;
     }
     @Override
-    void displayInfo(ArrayList names, ArrayList ID,ArrayList salary) {
+    void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name) {
              
-      
         for(int a=0;a<names.size(); a++){
-                    System.out.println(names.get(a));
-
-                    for(int z=0; z<ID.size(); z++){
-                        System.out.println(salary.get(z));
-
-                        for(int x=0; x<salary.size(); x++){
-                            System.out.println(salary.get(x));
-                        }
+            /*System.out.print(name.get(a)+" ");
+            System.out.print(id.get(a)+" ");
+            System.out.print(Salary.get(a)+" ");*/
+            
+            System.out.print(names.get(a)+" ");
+            System.out.print(ID.get(a)+" ");
+            System.out.print(salary.get(a)+"\n");
+                        
                     }
-                }
+                
         // throw new UnsupportedOperationException("Not supported yet."); 
     }
 
