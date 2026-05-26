@@ -1,3 +1,4 @@
+package employee;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -120,58 +121,93 @@ public class MainAbstr {
 		}
 		
                 if (option==4){
-					int choice1=0;
-					System.out.println("Calculate salary for Manager select 1:\nCalulate salary for Developer select2: ");
-					choice1= kb.nextInt();
+                    int choice1=0;
+                    System.out.println("Calculate salary for Manager select 1:\nCalulate salary for Developer select2: ");
+                    choice1= kb.nextInt();
 					
-					if(choice1==1){
-                    mn.calculateSalary(kb, salary1);
-					}
-					else{
-                    dv.calculateSalary(kb, salary1);    
-					}
+                        if(choice1==1){
+                            mn.calculateSalary(kb, salary1);
+                        }
+                        else{
+                            dv.calculateSalary(kb, salary1);    
+                        }
                 }
                 
                 if (option==5){
                     System.out.println("Search by name select 1, Search by ID select 2");
                     choice=kb.nextInt();
                     
-                        /*while(choice<1 || choice<2){
-							System.out.println("Invalid input");
-							
-							System.out.println("Search by name select 1, Search by ID select 2");
-							choice=kb.nextInt();
-						}*/
+                        while(choice<1 || choice>2){
+                            System.out.println("Invalid input");
+
+                            System.out.println("Search by name select 1, Search by ID select 2");
+                            choice=kb.nextInt();
+                            }
                     
                     
                     if(choice==1){
-                        System.out.println("type search name: ");
-                        searchName=kb.next();
+                        
+                     boolean valid = false;
+
+                        while(valid == false){
+
+                            valid = true;
+
+                            System.out.println("Type search name: ");
+                            searchName = kb.next();
+
+                            for(int a = 0; a < searchName.length(); a++){
+
+                                if(Character.isDigit(searchName.charAt(a))){
+
+                                    System.out.println("Invalid name");
+
+                                    valid = false;
+
+                                    break;
+                                }
+                            }
+                        }
+                        /* while(Character.isDigit(searchName.charAt(0))){
+                            System.out.println("Invalid name");
+                            
+                            System.out.println("Type search name: ");
+                            searchName=kb.next();
+                        }*/
 						
                         for(int a=0; a<name.size(); a++){
-                           if(searchName.equals(employeeNames.get(a))) {
-                               System.out.println(employeeNames.get(a)+employeeID.get(a)+employeeID.get(a));
-								found= true;
-								break;
+                           if(searchName.equalsIgnoreCase(employeeNames.get(a))) {
+                                System.out.printf("%-20s %-15s %15s%n","Employee Name","Employee ID","Employee Salary");
+                                System.out.printf("%-20s %-15s %15s%n",employeeNames.get(a),employeeID.get(a),ft.format(employeeSalary.get(a)));                                found= true;
+                                 break;
                            }else if(a==employeeID.size()-1){
                             System.out.println("Employee not found");   
                            }
                         }
                     }
                     else{ 
-                        System.out.println("type search ID: ");
+                        System.out.println("Type search ID: ");
                         searchID=kb.next();
-						
+				
+                        while(searchID.length()>3 ||searchID.length()<3 ){
+                            System.out.println("Invalid ID");
+                            
+                            System.out.println("Type search ID: ");
+                            searchID=kb.next();
+                        }
+                        
                         for(int a=0; a<employeeID.size(); a++){
                            if(searchID.equals(employeeID.get(a))) {
-                               System.out.println(employeeNames.get(a)+employeeID.get(a)+employeeSalary.get(a));
-							   found =true;
-							break;
+                                System.out.printf("%-20s %-15s %15s%n","Employee Name","Employee ID","Employee Salary");
+
+                                System.out.printf("%-20s %-15s %15s%n",employeeNames.get(a),employeeID.get(a),ft.format(employeeSalary.get(a)));
+                                    found =true;
+                                    break;
                            }else if(a==employeeID.size()-1){
-									if(found == false){
-										System.out.println("Employee not found");  
-									}
-						}
+                                if(found == false){
+                                    System.out.println("Employee not found");  
+                                }
+                            }
                         }
                     }
                 }
