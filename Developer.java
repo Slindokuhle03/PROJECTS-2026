@@ -1,13 +1,14 @@
-
-package employee;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 class Developer extends Employee implements Payable {
 	Scanner kb= new Scanner(System.in);
+	DecimalFormat ft= new DecimalFormat("R##,###.00#");
+
         
        @Override
                 
-        ArrayList addEmployeeName(ArrayList<String> name,String names){
+        ArrayList<String> addEmployeeName(ArrayList<String> name,String names){
             
                   name.add(names);
 
@@ -18,7 +19,7 @@ class Developer extends Employee implements Payable {
      return name;
     }
         @Override
-    ArrayList addEmployeeID(ArrayList<String> ID,String id){
+    ArrayList<String> addEmployeeID(ArrayList<String> ID,String id){
         /*String id;
         System.out.print("Please enter employee ID: ");
         id= kb.next();*/
@@ -27,7 +28,7 @@ class Developer extends Employee implements Payable {
      return ID;       
     }
         @Override
-        ArrayList addEmployeeSalary(ArrayList<Double> Salary,double salary){
+        ArrayList<Double> addEmployeeSalary(ArrayList<Double> Salary,double salary){
              /*double salary ;     
         System.out.print("Please enter employee base Salary: ");
         salary= kb.nextDouble();*/
@@ -37,17 +38,13 @@ class Developer extends Employee implements Payable {
     }
             
         @Override
-	void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name){
-           
+	void displayInfo(DecimalFormat ft,ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name){
+		
+		System.out.printf("%-20s %-15s %15s%n","Employee Name","Employee ID","Employee Salary");
+
 		for(int a=0;a<names.size(); a++){
-                   /* System.out.print(name.get(a)+" ");
-                    System.out.print(id.get(a)+" ");
-                    System.out.print(Salary.get(a)+" ");*/
-
-
-                    System.out.print(names.get(a)+" ");
-                    System.out.print(ID.get(a)+" ");
-                    System.out.print(salary.get(a)+"\n");
+                 
+                    System.out.printf("%-20s %-15s %15s%n",names.get(a),ID.get(a),ft.format(salary.get(a)));
                         
                     
                 }
@@ -65,9 +62,11 @@ class Developer extends Employee implements Payable {
         
             if(answer=='Y'){
                 total= salary+(overTimeHours*EXTRA_HOURS_RATE);
+				
             }else{
                 total= salary;
             }
+			System.out.println("Total salary is: "+ total);
          }	
 	
 }

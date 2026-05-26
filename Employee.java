@@ -1,4 +1,4 @@
-package employee;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ String name;
 String ID;
 double baseSalary;
 
-abstract void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name);
+abstract void displayInfo(DecimalFormat ft,ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name);
 abstract ArrayList addEmployeeName(ArrayList<String> names ,String name);
 abstract ArrayList addEmployeeID(ArrayList<String> Id,String ID);
 abstract ArrayList addEmployeeSalary(ArrayList<Double> Salary, double salary);

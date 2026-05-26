@@ -1,11 +1,13 @@
-package employee;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class MainAbstr {
     
-  public static void main(String [] args){
+  public static void main(String [] args) {
     Scanner kb =new Scanner(System.in);
+	DecimalFormat ft= new DecimalFormat("R##,###.00#");
+
        ArrayList<String> name= new ArrayList<>();
        ArrayList<String> ID= new ArrayList<>();
        ArrayList<Double> salary= new ArrayList<>();
@@ -42,12 +44,16 @@ public class MainAbstr {
         String Id=" ";
         double salary1=0;
         double baseSalary=0;
-	int option;
-	char answer=' ';
+		int option;
+		int choice;
+
+		char answer=' ';
+		boolean found= false;
+
 
 
 	do{
-		System.out.println("\t\t\tEmployee Management System");
+		System.out.println("\n\t\t\tEmployee Management System");
 		System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Emplyoyee\n6. Exist");
 		option= kb.nextInt();
 		
@@ -55,7 +61,7 @@ public class MainAbstr {
 			
 			System.out.println("Invalid input, select option 1 to 6");
 			
-			System.out.println("\t\t\tEmployee Management System");
+			System.out.println("\n\t\t\tEmployee Management System");
 			System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Emplyoyee\n6. Exist");
 			option= kb.nextInt();
 		}
@@ -108,32 +114,46 @@ public class MainAbstr {
 
 
 		if(option==3){
-			mn.displayInfo(name,ID,salary,employeeNames,employeeID,employeeSalary);
+			mn.displayInfo(ft,name,ID,salary,employeeNames,employeeID,employeeSalary);
 			//dv.displayInfo(name,ID,salary);
                        // System.out.println(employeeNames);
 		}
 		
                 if (option==4){
+					int choice1=0;
+					System.out.println("Calculate salary for Manager select 1:\nCalulate salary for Developer select2: ");
+					choice1= kb.nextInt();
+					
+					if(choice1==1){
                     mn.calculateSalary(kb, salary1);
+					}
+					else{
                     dv.calculateSalary(kb, salary1);    
+					}
                 }
                 
                 if (option==5){
-                    int choice=0;
                     System.out.println("Search by name select 1, Search by ID select 2");
                     choice=kb.nextInt();
                     
-                        
+                        /*while(choice<1 || choice<2){
+							System.out.println("Invalid input");
+							
+							System.out.println("Search by name select 1, Search by ID select 2");
+							choice=kb.nextInt();
+						}*/
                     
                     
                     if(choice==1){
                         System.out.println("type search name: ");
                         searchName=kb.next();
+						
                         for(int a=0; a<name.size(); a++){
-                           if(searchName.equals(name.get(a))) {
-                               System.out.println(name.get(a)+ID.get(a)+salary.get(a));
-
-                           }else{
+                           if(searchName.equals(employeeNames.get(a))) {
+                               System.out.println(employeeNames.get(a)+employeeID.get(a)+employeeID.get(a));
+								found= true;
+								break;
+                           }else if(a==employeeID.size()-1){
                             System.out.println("Employee not found");   
                            }
                         }
@@ -141,13 +161,17 @@ public class MainAbstr {
                     else{ 
                         System.out.println("type search ID: ");
                         searchID=kb.next();
+						
                         for(int a=0; a<employeeID.size(); a++){
-                           if(searchID.equals(ID.get(a))) {
-                               System.out.println(name.get(a)+ID.get(a)+salary.get(a));
-
-                           }else{
-                            System.out.println("Employee not found");   
-                           }
+                           if(searchID.equals(employeeID.get(a))) {
+                               System.out.println(employeeNames.get(a)+employeeID.get(a)+employeeSalary.get(a));
+							   found =true;
+							break;
+                           }else if(a==employeeID.size()-1){
+									if(found == false){
+										System.out.println("Employee not found");  
+									}
+						}
                         }
                     }
                 }

@@ -1,6 +1,7 @@
-package employee;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 public class Manager extends Employee implements Payable{
 
 
@@ -31,16 +32,15 @@ public class Manager extends Employee implements Payable{
         return Salary;
     }
     @Override
-    void displayInfo(ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name) {
-             
+    void displayInfo(DecimalFormat ft,ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name) {
+        
+		System.out.printf("%-20s %-15s %15s%n","Employee Name","Employee ID","Employee Salary");
+					
         for(int a=0;a<names.size(); a++){
-            /*System.out.print(name.get(a)+" ");
-            System.out.print(id.get(a)+" ");
-            System.out.print(Salary.get(a)+" ");*/
-            
-            System.out.print(names.get(a)+" ");
-            System.out.print(ID.get(a)+" ");
-            System.out.print(salary.get(a)+"\n");
+							
+            System.out.printf("%-20s %-15s %15s%n",names.get(a),ID.get(a),ft.format(salary.get(a)));
+            //System.out.print(ID.get(a));
+            //System.out.print(salary.get(a)+"\n");
                         
                     }
                 
@@ -50,7 +50,9 @@ public class Manager extends Employee implements Payable{
     @Override
    public void calculateSalary(Scanner kb, double salary) {
     char answer; 
-    int a;
+	int overTimeHours=0;   
+    final int EXTRA_HOURS_RATE= 300;    
+	int a;
     int completedProject=0;   
     final int PROJECT_BONUS= 3500;
     double total;
@@ -65,7 +67,12 @@ public class Manager extends Employee implements Payable{
             total= salary+(a*PROJECT_BONUS);
         }else{
             total= salary;
-        }
+        }    
+		System.out.println("Extra hours completed: ");
+		overTimeHours= kb.nextInt();
+		total+= overTimeHours*EXTRA_HOURS_RATE;
+  
+  System.out.println("Total pay is: "+ total);
         
     
     //throw new UnsupportedOperationException("Not supported yet."); 
@@ -74,7 +81,7 @@ public class Manager extends Employee implements Payable{
    public static void main(String [] args){
        
        Scanner kb= new Scanner(System.in);
-    
+	   DecimalFormat ft= new DecimalFormat("R##,###.00#");
 
    }
 }
