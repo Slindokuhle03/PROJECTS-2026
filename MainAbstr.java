@@ -11,15 +11,20 @@ public class MainAbstr {
 
        ArrayList<String> name= new ArrayList<>();
        ArrayList<String> ID= new ArrayList<>();
+       ArrayList<String> Role= new ArrayList<>();
        ArrayList<Double> salary= new ArrayList<>();
        //dev list
-       ArrayList<String> nameDev= new ArrayList<>();
+       /*ArrayList<String> nameDev= new ArrayList<>();
        ArrayList<String> IDDev= new ArrayList<>();
-       ArrayList<Double> salaryDev= new ArrayList<>();
+       ArrayList<String> RoleDev= new ArrayList<>();
+       ArrayList<Double> salaryDev= new ArrayList<>();*/
+       
        //combined list
        ArrayList<String> employeeNames= new ArrayList<>(name);
        ArrayList<String> employeeID= new ArrayList<>(ID);
        ArrayList<Double> employeeSalary= new ArrayList<>(salary);
+       ArrayList<String> employeeRole= new ArrayList<>(Role);
+       
 
        Developer dv= new Developer();
        Manager mn= new Manager();
@@ -32,6 +37,10 @@ public class MainAbstr {
        ID.add("123");
        ID.add("321");
        ID.add("213");
+       
+       Role.add("Developer");
+       Role.add("Developer");
+       Role.add("Manager");
        
        salary.add(60_000.00);
        salary.add(45_000.00);
@@ -55,7 +64,7 @@ public class MainAbstr {
 
 	do{
 		System.out.println("\n\t\t\tEmployee Management System");
-		System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Emplyoyee\n6. Exist");
+		System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Employee\n6. Exist");
 		option= kb.nextInt();
 		
 		if (option>6 || option<1){
@@ -63,7 +72,7 @@ public class MainAbstr {
 			System.out.println("Invalid input, select option 1 to 6");
 			
 			System.out.println("\n\t\t\tEmployee Management System");
-			System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Emplyoyee\n6. Exist");
+			System.out.println("1. Add Manager\n2. Add Developer\n3. Display Employees\n4. Calculate Salary\n5. Search Employee\n6. Exist");
 			option= kb.nextInt();
 		}
 		if (option==1){
@@ -79,7 +88,9 @@ public class MainAbstr {
                             System.out.print("Please enter employee base Salary: ");
                             salary1= kb.nextDouble();
                             salary=mn.addEmployeeSalary(salary,salary1);
-
+                            
+                            Role.add("Manager");
+                            
                             System.out.println("Add another employee? Yes/No");
                             answer= kb.next().toUpperCase().charAt(0);
 			}while(answer=='Y');
@@ -99,7 +110,8 @@ public class MainAbstr {
                             System.out.print("Please enter employee base Salary: ");
                             salary1= kb.nextDouble();
                             salary=dv.addEmployeeSalary(salary,salary1);
-
+                            
+                            Role.add("Developer");
 
                     System.out.println("Add another employee? Yes/No");
                     answer= kb.next().toUpperCase().charAt(0);
@@ -111,25 +123,25 @@ public class MainAbstr {
 		employeeNames.addAll(name);
                 employeeID.addAll(ID);
                 employeeSalary.addAll(salary);
-
+                employeeRole.addAll(Role);
 
 
 		if(option==3){
-			mn.displayInfo(ft,name,ID,salary,employeeNames,employeeID,employeeSalary);
+			mn.displayInfo(ft,name,ID,salary,employeeNames,employeeID,employeeSalary,Role);
 			//dv.displayInfo(name,ID,salary);
                        // System.out.println(employeeNames);
 		}
 		
                 if (option==4){
                     int choice1=0;
-                    System.out.println("Calculate salary for Manager select 1:\nCalulate salary for Developer select2: ");
+                    System.out.println("Calculate salary for Manager select 1:\nCalculate salary for Developer select 2: ");
                     choice1= kb.nextInt();
 					
                         if(choice1==1){
-                            mn.calculateSalary(kb, salary1);
+                            mn.calculateSalary(kb,employeeID,employeeSalary);
                         }
                         else{
-                            dv.calculateSalary(kb, salary1);    
+                            dv.calculateSalary(kb,employeeID,employeeSalary);    
                         }
                 }
                 

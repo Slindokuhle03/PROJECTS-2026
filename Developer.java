@@ -40,35 +40,57 @@ class Developer extends Employee implements Payable {
     }
             
         @Override
-	void displayInfo(DecimalFormat ft,ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name){
+	void displayInfo(DecimalFormat ft,ArrayList names, ArrayList ID,ArrayList salary,ArrayList Salary, ArrayList id, ArrayList name, ArrayList role){
 		
-		System.out.printf("%-20s %-15s %15s%n","Employee Name","Employee ID","Employee Salary");
+            // \u001B[1m turns bold ON, \u001B[0m turns bold OFF
+            System.out.printf("\u001B[1m%-20s %-15s %-15s %-20s\u001B[0m%n", "Employee Name", "Employee ID", "Employee Salary", "Employee Role");
 
 		for(int a=0;a<names.size(); a++){
                  
-                    System.out.printf("%-20s %-15s %15s%n",names.get(a),ID.get(a),ft.format(salary.get(a)));
+                    System.out.printf("%-20s %-15s %-15s %-20s%n",names.get(a),ID.get(a),ft.format(salary.get(a)),role.get(a));
                         
                     
                 }
 	}
 	
         @Override
-	 public void calculateSalary(Scanner kb, double salary) {
+	 public void calculateSalary(Scanner kb,ArrayList ID,ArrayList<Double> Salary) {
             char answer;   
             int overTimeHours=0;   
             final int EXTRA_HOURS_RATE= 300;
             double total;
+            boolean found= false;
+            boolean ExtraHours= false;
+                        
+            System.out.println("Enter manager ID: ");
+            String answerID=kb.next();
+            
+              for(int a=0; a<ID.size(); a++){
+                           if(answerID.equals(ID.get(a))) {
+                                found =true;
+                            System.out.println("Are there any overtime hours that you did? YES/NO: ");
+                            answer= kb.next().toUpperCase().charAt(0);
 
-            System.out.println("Are there any overtime hours that you did? YES/NO: ");
-            answer= kb.next().toUpperCase().charAt(0);
+                                if(answer=='Y'){
+                                    System.out.println("How many over hours done? : ");
+                                    overTimeHours=kb.nextInt();
+
+                                    total= Salary.get(a)+(overTimeHours*EXTRA_HOURS_RATE);
+                                        
+                                }else{
+                                    total= Salary.get(a);
+                                }
+                                System.out.println("Total salary is: "+ total);
+                                break;
+                            }else if(a==ID.size()-1){
+                                if(found == false){
+                                    System.out.println("Employee not found");  
+                                }
+                            }
+                        }
+                    }
+
         
-            if(answer=='Y'){
-                total= salary+(overTimeHours*EXTRA_HOURS_RATE);
-				
-            }else{
-                total= salary;
-            }
-			System.out.println("Total salary is: "+ total);
-         }	
+         
 	
 }
